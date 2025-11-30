@@ -2,9 +2,9 @@
 using MediatR;
 using MediatR.Pipeline;
 using Microsoft.EntityFrameworkCore;
+using StargateAPI.Business.Constants;
 using StargateAPI.Business.Data;
 using StargateAPI.Controllers;
-using System.Net;
 
 namespace StargateAPI.Business.Commands
 {
@@ -52,7 +52,7 @@ namespace StargateAPI.Business.Commands
         }
         public async Task<CreateAstronautDutyResult> Handle(CreateAstronautDuty request, CancellationToken cancellationToken)
         {
-
+            // JH - SQL injection risk
             var query = $"SELECT * FROM [Person] WHERE \'{request.Name}\' = Name";
 
             var person = await _context.Connection.QueryFirstOrDefaultAsync<Person>(query);
@@ -68,7 +68,7 @@ namespace StargateAPI.Business.Commands
                 astronautDetail.CurrentDutyTitle = request.DutyTitle;
                 astronautDetail.CurrentRank = request.Rank;
                 astronautDetail.CareerStartDate = request.DutyStartDate.Date;
-                if (request.DutyTitle == "RETIRED")
+                if (request.DutyTitle == DutyTitles.Retired)
                 {
                     astronautDetail.CareerEndDate = request.DutyStartDate.Date;
                 }
@@ -80,7 +80,7 @@ namespace StargateAPI.Business.Commands
             {
                 astronautDetail.CurrentDutyTitle = request.DutyTitle;
                 astronautDetail.CurrentRank = request.Rank;
-                if (request.DutyTitle == "RETIRED")
+                if (request.DutyTitle == DutyTitles.Retired)
                 {
                     astronautDetail.CareerEndDate = request.DutyStartDate.AddDays(-1).Date;
                 }
@@ -106,6 +106,7 @@ namespace StargateAPI.Business.Commands
                 DutyEndDate = null
             };
 
+            // JH - consider using tool with cancellation token support for this one and the next
             await _context.AstronautDuties.AddAsync(newAstronautDuty);
 
             await _context.SaveChangesAsync();

@@ -25,6 +25,14 @@ builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
+// Seed development data
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<StargateContext>();
+    DatabaseSeeder.SeedDevelopmentData(context);
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
