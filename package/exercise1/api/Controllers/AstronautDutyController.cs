@@ -7,7 +7,7 @@ using System.Net;
 namespace StargateAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AstronautDutyController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,31 +19,18 @@ namespace StargateAPI.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> GetAstronautDutiesByName(string name)
         {
-            try
+            var result = await _mediator.Send(new GetPersonByName()
             {
-                var result = await _mediator.Send(new GetPersonByName()
-                {
-                    Name = name
-                });
-
-                return this.GetResponse(result);
-            }
-            catch (Exception ex)
-            {
-                return this.GetResponse(new BaseResponse()
-                {
-                    Message = ex.Message,
-                    Success = false,
-                    ResponseCode = (int)HttpStatusCode.InternalServerError
-                });
-            }            
+                Name = name
+            });
+            return this.GetResponse(result);
         }
 
         [HttpPost("")]
         public async Task<IActionResult> CreateAstronautDuty([FromBody] CreateAstronautDuty request)
         {
-                var result = await _mediator.Send(request);
-                return this.GetResponse(result);           
+            var result = await _mediator.Send(request);
+            return this.GetResponse(result);
         }
     }
 }
