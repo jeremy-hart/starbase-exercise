@@ -1,5 +1,5 @@
-﻿using Dapper;
-using MediatR;
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using StargateAPI.Business.Data;
 using StargateAPI.Business.Dtos;
 using StargateAPI.Controllers;
@@ -28,11 +28,19 @@ namespace StargateAPI.Business.Queries
             _logger.LogError("This is a sample error log for demonstration purposes");
             var result = new GetPeopleResult();
 
-            var query = $"SELECT a.Id as PersonId, a.Name, b.CurrentRank, b.CurrentDutyTitle, b.CareerStartDate, b.CareerEndDate FROM [Person] a LEFT JOIN [AstronautDetail] b on b.PersonId = a.Id";
+            var people = await _context.People
+                .Select(p => new PersonAstronaut
+                {
+                    PersonId = p.Id,
+                    Name = p.Name,
+                    CurrentRank = p.AstronautDetail != null ? p.AstronautDetail.CurrentRank : null,
+                    CurrentDutyTitle = p.AstronautDetail != null ? p.AstronautDetail.CurrentDutyTitle : null,
+                    CareerStartDate = p.AstronautDetail != null ? p.AstronautDetail.CareerStartDate : null,
+                    CareerEndDate = p.AstronautDetail != null ? p.AstronautDetail.CareerEndDate : null
+                })
+                .ToListAsync(cancellationToken);
 
-            var people = await _context.Connection.QueryAsync<PersonAstronaut>(query);
-
-            result.People = people.ToList();
+            result.People = people;
 
             _logger.LogInformation("Successfully retrieved {PeopleCount} people", result.People.Count);
 

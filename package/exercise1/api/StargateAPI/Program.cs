@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 var dataDir = Path.Combine(builder.Environment.ContentRootPath, "Data");
 Directory.CreateDirectory(dataDir);
 
+// TODO: Fix this hack to specify the SQLite database path
 // Update configuration to use absolute path for database
 var dbPath = Path.Combine(dataDir, "starbase.db");
 builder.Configuration["ConnectionStrings:StarbaseApiDatabase"] = $"Data Source={dbPath}";
