@@ -12,7 +12,8 @@ public class CreatePersonCommandTests
     public async Task Handle_WithValidName_CreatesNewPerson()
     {
         using var context = TestDbContextFactory.CreateInMemoryContext();
-        var handler = new CreatePersonHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreatePersonHandler>();
+        var handler = new CreatePersonHandler(context, logger);
         var command = new CreatePerson { Name = "John Doe" };
 
         var result = await handler.Handle(command, CancellationToken.None);
@@ -25,7 +26,8 @@ public class CreatePersonCommandTests
     public async Task Handle_WithValidName_SavesPersonWithCorrectName()
     {
         using var context = TestDbContextFactory.CreateInMemoryContext();
-        var handler = new CreatePersonHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreatePersonHandler>();
+        var handler = new CreatePersonHandler(context, logger);
         var command = new CreatePerson { Name = "John Doe" };
 
         var result = await handler.Handle(command, CancellationToken.None);
@@ -42,7 +44,8 @@ public class CreatePersonCommandTests
         var builder = new TestDataBuilder(context);
         builder.CreatePerson("Jane Smith");
         
-        var preProcessor = new CreatePersonPreProcessor(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreatePersonPreProcessor>();
+        var preProcessor = new CreatePersonPreProcessor(context, logger);
         var command = new CreatePerson { Name = "Jane Smith" };
 
         var act = async () => await preProcessor.Process(command, CancellationToken.None);
@@ -54,7 +57,8 @@ public class CreatePersonCommandTests
     public async Task Handle_NewPerson_HasNoAstronautDetail()
     {
         using var context = TestDbContextFactory.CreateInMemoryContext();
-        var handler = new CreatePersonHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreatePersonHandler>();
+        var handler = new CreatePersonHandler(context, logger);
         var command = new CreatePerson { Name = "New Person" };
 
         var result = await handler.Handle(command, CancellationToken.None);
@@ -67,7 +71,8 @@ public class CreatePersonCommandTests
     public async Task Handle_NewPerson_HasNoAstronautDuties()
     {
         using var context = TestDbContextFactory.CreateInMemoryContext();
-        var handler = new CreatePersonHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreatePersonHandler>();
+        var handler = new CreatePersonHandler(context, logger);
         var command = new CreatePerson { Name = "New Person" };
 
         var result = await handler.Handle(command, CancellationToken.None);

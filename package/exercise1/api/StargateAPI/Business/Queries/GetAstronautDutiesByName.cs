@@ -14,14 +14,17 @@ namespace StargateAPI.Business.Queries
     public class GetAstronautDutiesByNameHandler : IRequestHandler<GetAstronautDutiesByName, GetAstronautDutiesByNameResult>
     {
         private readonly StargateContext _context;
+        private readonly ILogger<GetAstronautDutiesByNameHandler> _logger;
 
-        public GetAstronautDutiesByNameHandler(StargateContext context)
+        public GetAstronautDutiesByNameHandler(StargateContext context, ILogger<GetAstronautDutiesByNameHandler> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<GetAstronautDutiesByNameResult> Handle(GetAstronautDutiesByName request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Retrieving astronaut duties for {Name}", request.Name);
 
             var result = new GetAstronautDutiesByNameResult();
 
@@ -37,8 +40,9 @@ namespace StargateAPI.Business.Queries
 
             result.AstronautDuties = duties.ToList();
 
-            return result;
+            _logger.LogInformation("Successfully retrieved {DutyCount} astronaut duties for {Name}", result.AstronautDuties.Count, request.Name);
 
+            return result;
         }
     }
 

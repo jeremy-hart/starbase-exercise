@@ -19,7 +19,8 @@ public class CreateAstronautDutyCommandTests
         var builder = new TestDataBuilder(context);
         var person = builder.CreatePerson("Test Person");
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person",
@@ -39,7 +40,8 @@ public class CreateAstronautDutyCommandTests
         var builder = new TestDataBuilder(context);
         builder.CreatePerson("Test Person");
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person",
@@ -62,7 +64,8 @@ public class CreateAstronautDutyCommandTests
         var builder = new TestDataBuilder(context);
         var person = builder.CreatePerson("Test Person");
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person",
@@ -83,7 +86,8 @@ public class CreateAstronautDutyCommandTests
         var builder = new TestDataBuilder(context);
         var person = builder.CreatePerson("Test Person");
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person",
@@ -104,7 +108,8 @@ public class CreateAstronautDutyCommandTests
         var builder = new TestDataBuilder(context);
         var person = builder.CreatePerson("Test Person");
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person",
@@ -132,7 +137,8 @@ public class CreateAstronautDutyCommandTests
         builder.CreateDetail(person.Id, "Major", "Pilot", new DateTime(2024, 1, 1));
         builder.CreateDuty(person.Id, "Major", "Pilot", new DateTime(2024, 1, 1));
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person A",
@@ -155,7 +161,8 @@ public class CreateAstronautDutyCommandTests
         builder.CreateDetail(person.Id, "Major", "Pilot", new DateTime(2024, 1, 1));
         builder.CreateDuty(person.Id, "Major", "Pilot", new DateTime(2024, 1, 1));
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person A",
@@ -178,7 +185,8 @@ public class CreateAstronautDutyCommandTests
         builder.CreateDetail(person.Id, "Major", "Pilot", new DateTime(2024, 1, 1));
         builder.CreateDuty(person.Id, "Major", "Pilot", new DateTime(2024, 1, 1));
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person A",
@@ -202,7 +210,8 @@ public class CreateAstronautDutyCommandTests
         builder.CreateDetail(person.Id, "Major", "Pilot", new DateTime(2024, 1, 1));
         builder.CreateDuty(person.Id, "Major", "Pilot", new DateTime(2024, 1, 1));
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person A",
@@ -225,7 +234,8 @@ public class CreateAstronautDutyCommandTests
         var builder = new TestDataBuilder(context);
         builder.CreatePerson("Test Person C");
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person C",
@@ -250,7 +260,8 @@ public class CreateAstronautDutyCommandTests
         var person = builder.CreatePerson("Test Person C");
         builder.CreateDuty(person.Id, "Lieutenant", "Engineer", new DateTime(2024, 1, 1));
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person C",
@@ -273,7 +284,8 @@ public class CreateAstronautDutyCommandTests
         var person = builder.CreatePerson("Test Astronaut");
         builder.CreateDuty(person.Id, "Lieutenant", "Engineer", new DateTime(2024, 1, 1));
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         
         var command1 = new CreateAstronautDuty
         {
@@ -310,7 +322,8 @@ public class CreateAstronautDutyCommandTests
         var person = builder.CreatePerson("Test Person B");
         builder.CreateDetail(person.Id, "Colonel", "Pilot", new DateTime(2024, 1, 1));
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person B",
@@ -332,7 +345,8 @@ public class CreateAstronautDutyCommandTests
         var person = builder.CreatePerson("Test Person B");
         builder.CreateDetail(person.Id, "Colonel", "Pilot", new DateTime(2024, 1, 1));
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person B",
@@ -353,7 +367,8 @@ public class CreateAstronautDutyCommandTests
         var builder = new TestDataBuilder(context);
         var person = builder.CreatePerson("Test Astronaut");
         
-        var handler = new CreateAstronautDutyHandler(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyHandler>();
+        var handler = new CreateAstronautDutyHandler(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Astronaut",
@@ -376,7 +391,8 @@ public class CreateAstronautDutyCommandTests
     public async Task PreProcessor_WithNonExistentPerson_ThrowsBadHttpRequestException()
     {
         using var context = TestDbContextFactory.CreateInMemoryContext();
-        var preProcessor = new CreateAstronautDutyPreProcessor(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyPreProcessor>();
+        var preProcessor = new CreateAstronautDutyPreProcessor(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Non Existent Person",
@@ -398,7 +414,8 @@ public class CreateAstronautDutyCommandTests
         var startDate = new DateTime(2024, 1, 1);
         builder.CreateDuty(person.Id, "Major", "Pilot", startDate);
         
-        var preProcessor = new CreateAstronautDutyPreProcessor(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyPreProcessor>();
+        var preProcessor = new CreateAstronautDutyPreProcessor(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person",
@@ -422,7 +439,8 @@ public class CreateAstronautDutyCommandTests
         
         var person2 = builder.CreatePerson("Test Person B");
         
-        var preProcessor = new CreateAstronautDutyPreProcessor(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyPreProcessor>();
+        var preProcessor = new CreateAstronautDutyPreProcessor(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person B",
@@ -443,7 +461,8 @@ public class CreateAstronautDutyCommandTests
         var person = builder.CreatePerson("Test Person");
         builder.CreateDuty(person.Id, "Colonel", "Pilot", new DateTime(2024, 1, 1));
         
-        var preProcessor = new CreateAstronautDutyPreProcessor(context);
+        var logger = MockLoggerFactory.CreateMockLogger<CreateAstronautDutyPreProcessor>();
+        var preProcessor = new CreateAstronautDutyPreProcessor(context, logger);
         var command = new CreateAstronautDuty
         {
             Name = "Test Person",
