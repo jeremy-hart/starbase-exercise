@@ -37,7 +37,7 @@ namespace StargateAPI.Business.Commands
 
             var verifyNoPreviousDuty = await _context.AstronautDuties
                 .AsNoTracking()
-                .FirstOrDefaultAsync(z => z.DutyTitle == request.DutyTitle && z.DutyStartDate == request.DutyStartDate, cancellationToken);
+                .FirstOrDefaultAsync(z => z.PersonId == person.Id && z.DutyTitle == request.DutyTitle && z.DutyStartDate == request.DutyStartDate, cancellationToken);
 
             if (verifyNoPreviousDuty is not null) throw new BadHttpRequestException("Bad Request");
         }
