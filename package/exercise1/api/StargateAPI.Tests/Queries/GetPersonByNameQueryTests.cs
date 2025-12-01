@@ -37,6 +37,9 @@ public class GetPersonByNameQueryTests
 
         result.Should().NotBeNull();
         result.Person.Should().BeNull();
+        result.Success.Should().BeFalse();
+        result.ResponseCode.Should().Be(404);
+        result.Message.Should().Be("Person not found");
     }
 
     [Fact]
@@ -104,9 +107,12 @@ public class GetPersonByNameQueryTests
     public async Task Handle_Always_ReturnsSuccessResponse()
     {
         using var context = TestDbContextFactory.CreateInMemoryContext();
+        var builder = new TestDataBuilder(context);
+        builder.CreatePerson("Existing Person");
+        
         var logger = MockLoggerFactory.CreateMockLogger<GetPersonByNameHandler>();
         var handler = new GetPersonByNameHandler(context, logger);
-        var query = new GetPersonByName { Name = "Anyone" };
+        var query = new GetPersonByName { Name = "Existing Person" };
 
         var result = await handler.Handle(query, CancellationToken.None);
 

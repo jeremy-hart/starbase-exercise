@@ -51,6 +51,9 @@ namespace StargateAPI.Business.Queries
             else
             {
                 _logger.LogInformation("Person {Name} not found", request.Name);
+                result.Success = false;
+                result.Message = "Person not found";
+                result.ResponseCode = (int)System.Net.HttpStatusCode.NotFound;
             }
 
             return result;
